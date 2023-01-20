@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link rel="canonical" href="https://html5-templates.com/" />
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+	<script src="{{url_for('static', filename = 'script.js')}}"></script>
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename = 'style.css')}}" />
+	<title>Windows Template</title>
+</head>
+<body>
+	<div id="desktop">
+		<div class="window" data-title="Data">
+			<table>
+				{% for items in data %}
+					{{items|safe}}
+				{% endfor %}
+			</table>
+		</div>
+
+		<div class="window" data-title="Column Chart">
+			<img class="center-fit" src="{{ url2 }}">
+		</div>
+		<div class="window" data-title="Graph with polynomial line">
+			<img class="center-fit" src= "{{ url1 }}">
+		</div>
+
+
+		<div class="window" data-title="Welcome">
+			<h1>Welcome to my crypto price prediction website</h1>
+			<form action="/valid" method="POST">
+				<!-- for wrong user pair input ask again -->
+				{% if invalidpair %}
+					<p>Pair name invalid, please enter one of the following: BTC, ETH, BNB, XRP, ADA:</p>
+					<p><input type="text" name="pair" /></p>
+				{% else %}
+					<p>Enter the cryptocurrency you want the prediction of. Choose one of the following: BTC, ETH, BNB, XRP, ADA: </p>
+					<p><input type="text" name="pair" /></p>
+				{% endif %}
+
+				<!-- for wrong user days input ask again -->
+				{% if invaliddays %}
+					<p>Wrong amount of days. Number of days must be between 10 and 730:</p>
+					<p><input type="text" name="days" /></p>
+				{% else %}
+					<p>Enter how many days data you want: </p>
+					<p><input type="text" name="days" /></p>
+				{% endif %}
+
+				<p><input type="submit" value="submit" /></p>
+			</form>
+			<hr />
+			<p><strong>This is a personal project for educational purposes, the predictions should not be taken as financial advice</strong></p>
+			<!-- print pair's prediction -->
+			{% if prediction %}
+			<p>
+				Tomorrow's price prediction for the coin you chose is: {{prediction}} USD
+			</p>
+			{% endif %}
+		</div>
+
+
+		<div id="taskbar">		
+		</div>
+		
+		<div id="icons">
+			<a class="openWindow" data-id="0">Open Data</a>
+			<a class="openWindow" data-id="1">Column Chart</a>
+			<a class="openWindow" data-id="2">Graph Chart</a>
+			<a class="openWindow" data-id="3">Welcome screen</a>
+		</div>
+		<a id="templateLink">&copy; Cryptocurrency price prediction personal project</a>
+	</div>
+</body>
+
+</html>
