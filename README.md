@@ -9,7 +9,7 @@ alternatively you can simply install the required pips and run 'main.py' after d
 
 ## requirements
 - Python 3.8
-- numoy
+- numpy
 - matplotlib
 - yfinance
 - Flask
